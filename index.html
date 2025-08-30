@@ -166,21 +166,33 @@
             isMusicPlaying = !isMusicPlaying;
         });
         
-        // Simulate visitor counter (in a real app, you'd use an API)
-        let visitorCount = Math.floor(Math.random() * 1000) + 500;
-        const counterElement = document.getElementById('visitorCount');
-        
-        // Animate counter
-        let currentCount = 0;
-        const counterInterval = setInterval(() => {
-            if (currentCount < visitorCount) {
-                currentCount += Math.ceil(visitorCount / 50);
-                if (currentCount > visitorCount) currentCount = visitorCount;
-                counterElement.textContent = currentCount.toLocaleString();
-            } else {
-                clearInterval(counterInterval);
-            }
-        }, 50);
+        async function animateVisitorCount(finalCount) {
+    const counterElement = document.getElementById('visitorCount');
+    let currentCount = 0;
+    const counterInterval = setInterval(() => {
+        if (currentCount < finalCount) {
+            currentCount += Math.ceil(finalCount / 50);
+            if (currentCount > finalCount) currentCount = finalCount;
+            counterElement.textContent = currentCount.toLocaleString();
+        } else {
+            clearInterval(counterInterval);
+        }
+    }, 50);
+}
+
+async function updateVisitorCount() {
+    try {
+        const res = await fetch("/api/views"); // calls serverless function
+        const data = await res.json();
+        animateVisitorCount(data.views);
+    } catch (err) {
+        console.error("Failed to fetch visitor count:", err);
+        document.getElementById('visitorCount').textContent = "N/A";
+    }
+}
+
+// Run it
+updateVisitorCount();
         
         // Add hover effects to glass card
         const glassCard = document.querySelector('.glass-card');
