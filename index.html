@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>._rayzz | Fullstack Developer</title>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let msg = " ._rayzz | Fullstack Developer ✦ "; // Add a little padding + symbol
+      let pos = 0;
+
+      setInterval(() => {
+        document.title = msg.substring(pos) + msg.substring(0, pos);
+        pos = (pos + 1) % msg.length;
+      }, 200); // speed (ms)
+    });
+  </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -271,3 +282,4 @@
     </script>
 </body>
 </html>
+
