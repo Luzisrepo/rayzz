@@ -166,22 +166,59 @@
             isMusicPlaying = !isMusicPlaying;
         });
         
-        // Simulate visitor counter (in a real app, you'd use an API)
-        let visitorCount = Math.floor(Math.random() * 1000) + 500;
-        const counterElement = document.getElementById('visitorCount');
-        
-        // Animate counter
-        let currentCount = 0;
-        const counterInterval = setInterval(() => {
-            if (currentCount < visitorCount) {
-                currentCount += Math.ceil(visitorCount / 50);
-                if (currentCount > visitorCount) currentCount = visitorCount;
-                counterElement.textContent = currentCount.toLocaleString();
-            } else {
-                clearInterval(counterInterval);
+        // Visitor counter with daily growth
+        function updateVisitorCount() {
+            const baseCount = 1270;
+            const dailyGrowth = 3;
+            const countKey = 'visitorCount';
+            const dateKey = 'lastUpdateDate';
+            
+            // Get stored data or initialize
+            let storedCount = localStorage.getItem(countKey);
+            let storedDate = localStorage.getItem(dateKey);
+            const today = new Date().toDateString();
+            
+            // If first visit or date changed
+            if (!storedCount || !storedDate || storedDate !== today) {
+                if (storedDate !== today && storedCount && storedDate) {
+                    // Calculate days passed since last visit
+                    const lastDate = new Date(storedDate);
+                    const currentDate = new Date();
+                    const daysPassed = Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+                    
+                    // Update count based on days passed
+                    storedCount = parseInt(storedCount) + (dailyGrowth * daysPassed);
+                } else {
+                    // First visit or no previous data
+                    storedCount = baseCount;
+                }
+                
+                // Update storage with new values
+                localStorage.setItem(countKey, storedCount);
+                localStorage.setItem(dateKey, today);
             }
-        }, 50);
+            
+            // Animate counter
+            const counterElement = document.getElementById('visitorCount');
+            let currentCount = 0;
+            const targetCount = parseInt(storedCount);
+            const duration = 2000; // Animation duration in ms
+            const steps = 60; // Number of animation steps
+            const increment = targetCount / steps;
+            const stepTime = duration / steps;
+            
+            const timer = setInterval(() => {
+                currentCount += increment;
+                if (currentCount >= targetCount) {
+                    currentCount = targetCount;
+                    clearInterval(timer);
+                }
+                counterElement.textContent = Math.round(currentCount).toLocaleString();
+            }, stepTime);
+        }
         
+        // Initialize the counter
+        updateVisitorCount();
         
         // Add hover effects to glass card
         const glassCard = document.querySelector('.glass-card');
@@ -234,4 +271,3 @@
     </script>
 </body>
 </html>
-
