@@ -1,11 +1,33 @@
 {
-  "name": "visitor-counter",
+  "name": "rayzz",
   "version": "1.0.0",
-  "type": "module",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
-    "@vercel/kv": "^1.0.0"
+    "cluster-key-slot": "^1.1.2",
+    "debug": "^4.4.1",
+    "denque": "^2.1.0",
+    "ioredis": "^5.7.0",
+    "lodash.defaults": "^4.2.0",
+    "lodash.isarguments": "^3.1.0",
+    "ms": "^2.1.3",
+    "redis-errors": "^1.2.0",
+    "redis-parser": "^3.0.0",
+    "standard-as-callback": "^2.1.0"
   },
+  "devDependencies": {},
   "scripts": {
-    "dev": "vercel dev"
-  }
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luzisrepo/rayzz.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luzisrepo/rayzz/issues"
+  },
+  "homepage": "https://github.com/Luzisrepo/rayzz#readme"
 }
