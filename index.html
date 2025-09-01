@@ -185,11 +185,54 @@
       isMusicPlaying = !isMusicPlaying;
     });
 
-    // Visitor counter (basic)
+    // Visitor counter with random daily growth
     function updateVisitorCount() {
       const baseCount = 1270;
-      document.getElementById('visitorCount').textContent = baseCount.toLocaleString();
+      const countKey = 'visitorCount';
+      const dateKey = 'lastUpdateDate';
+
+      let storedCount = localStorage.getItem(countKey);
+      let storedDate = localStorage.getItem(dateKey);
+      const today = new Date().toDateString();
+
+      if (!storedCount || !storedDate || storedDate !== today) {
+        if (storedDate !== today && storedCount && storedDate) {
+          const lastDate = new Date(storedDate);
+          const currentDate = new Date();
+          const daysPassed = Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
+
+          let totalIncrease = 0;
+          for (let i = 0; i < daysPassed; i++) {
+            totalIncrease += Math.floor(Math.random() * (10 - 2 + 1)) + 2; // random 2–10
+          }
+
+          storedCount = parseInt(storedCount) + totalIncrease;
+        } else {
+          storedCount = baseCount;
+        }
+
+        localStorage.setItem(countKey, storedCount);
+        localStorage.setItem(dateKey, today);
+      }
+
+      const counterElement = document.getElementById('visitorCount');
+      let currentCount = 0;
+      const targetCount = parseInt(storedCount);
+      const duration = 2000;
+      const steps = 60;
+      const increment = targetCount / steps;
+      const stepTime = duration / steps;
+
+      const timer = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= targetCount) {
+          currentCount = targetCount;
+          clearInterval(timer);
+        }
+        counterElement.textContent = Math.round(currentCount).toLocaleString();
+      }, stepTime);
     }
+
     updateVisitorCount();
   </script>
 </body>
