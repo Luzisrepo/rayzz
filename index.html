@@ -1,286 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>._rayzz | Dev</title>
-    <script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>._rayzz | Dev</title>
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
-      let msg = " ._rayzz | Fullstack Developer ✦ "; // Add a little padding + symbol
+      let msg = " ._rayzz | Fullstack Developer ✦ ";
       let pos = 0;
-
       setInterval(() => {
         document.title = msg.substring(pos) + msg.substring(0, pos);
         pos = (pos + 1) % msg.length;
-      }, 200); // speed (ms)
+      }, 200);
     });
   </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .video-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            object-fit: cover;
-            filter: brightness(0.6);
-        }
-        
-        .glass-card {
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            background-color: rgba(17, 25, 40, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.125);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
-        }
-        
-        .social-btn {
-            transition: all 0.3s ease;
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.125);
-        }
-        
-        .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .discord-btn:hover {
-            background-color: rgba(88, 101, 242, 0.4);
-            border-color: rgba(88, 101, 242, 0.8);
-        }
-        
-        .github-btn:hover {
-            background-color: rgba(36, 41, 46, 0.4);
-            border-color: rgba(36, 41, 46, 0.8);
-        }
-        
-        .glow-text {
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-        }
-        
-        .counter {
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        @media (max-width: 640px) {
-            .glass-card {
-                width: 90%;
-                padding: 1.5rem;
-            }
-            
-            .social-btn {
-                padding: 0.75rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      object-fit: cover;
+      filter: brightness(0.6);
+    }
+    .glass-card {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(17, 25, 40, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.125);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    }
+    /* ENTER screen */
+    #enterScreen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      backdrop-filter: blur(8px) brightness(0.7);
+      transition: opacity 0.8s ease;
+    }
+    #enterButton {
+      font-size: 2rem;
+      padding: 1rem 3rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 0 12px rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: pulseGlow 2s infinite;
+      display: flex;
+      gap: 0.2em;
+    }
+    #enterButton span {
+      display: inline-block;
+      opacity: 0.6;
+      animation: glowText 2s infinite;
+    }
+    #enterButton span:nth-child(1) { animation-delay: 0s; }
+    #enterButton span:nth-child(2) { animation-delay: 0.2s; }
+    #enterButton span:nth-child(3) { animation-delay: 0.4s; }
+    #enterButton span:nth-child(4) { animation-delay: 0.6s; }
+    #enterButton span:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes glowText {
+      0%, 100% { opacity: 0.6; text-shadow: none; }
+      50% { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+    }
+
+    #enterButton:hover {
+      transform: scale(1.05);
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+      50% { box-shadow: 0 0 30px rgba(255,255,255,0.5); }
+      100% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+    }
+    #mainContent {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+  </style>
 </head>
 <body class="bg-black text-white flex items-center justify-center">
-    <!-- Video Background -->
-    <video autoplay loop muted playsinline class="video-background" id="bgVideo">
-        <source src="./wpp.mp4" type="video/mp4">
-    </video>
-    
-    <!-- Audio Element (hidden) -->
-    <audio id="bgMusic" loop>
-        <source src="./music.mp3" type="audio/mp3">
-    </audio>
-    
-    <!-- Main Content -->
-    <div class="glass-card rounded-2xl p-8 w-full max-w-md mx-4 relative overflow-hidden animate-float">
-        <!-- Music Toggle -->
-        <div class="absolute top-4 right-4">
-            <button id="musicToggle" class="text-white/70 hover:text-white transition-colors">
-                <i class="fas fa-volume-mute" id="musicIcon"></i>
-            </button>
-        </div>
-        
-        <!-- Profile Content -->
-        <div class="flex flex-col items-center text-center">
-            <h1 class="text-4xl font-bold mb-2 glow-text">._rayzz</h1>
-            <p class="text-lg text-white/80 mb-8 font-mono">Fullstack Developer</p>
-            
-            <div class="w-full flex flex-col space-y-4 mb-8">
-                <a href="https://discord.com/users/1302710495362420747" target="_blank" class="social-btn discord-btn rounded-xl py-3 px-6 flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors">
-                    <i class="fab fa-discord mr-3 text-xl"></i>
-                    <span>Connect on Discord</span>
-                </a>
-                
-                <a href="https://github.com/luzisrepo" target="_blank" class="social-btn github-btn rounded-xl py-3 px-6 flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors">
-                    <i class="fab fa-github mr-3 text-xl"></i>
-                    <span>View on GitHub</span>
-                </a>
-            </div>
-            
-            <div class="counter text-sm text-white/60 flex items-center">
-                <i class="fas fa-users mr-2"></i>
-                <span id="visitorCount">Loading...</span>
-                <span class="ml-1">visitors</span>
-            </div>
-        </div>
+
+  <!-- Video Background -->
+  <video autoplay loop muted playsinline class="video-background" id="bgVideo">
+    <source src="./wpp.mp4" type="video/mp4">
+  </video>
+
+  <!-- Audio Element -->
+  <audio id="bgMusic" loop>
+    <source src="./music.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- ENTER screen -->
+  <div id="enterScreen">
+    <button id="enterButton">
+      <span>E</span><span>n</span><span>t</span><span>e</span><span>r</span>
+    </button>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainContent" class="glass-card rounded-2xl p-8 w-full max-w-md mx-4 relative overflow-hidden animate-float">
+    <div class="absolute top-4 right-4">
+      <button id="musicToggle" class="text-white/70 hover:text-white transition-colors">
+        <i class="fas fa-volume-mute" id="musicIcon"></i>
+      </button>
     </div>
-    
-    <script>
-        // Music toggle functionality
-        const musicToggle = document.getElementById('musicToggle');
-        const musicIcon = document.getElementById('musicIcon');
-        const bgMusic = document.getElementById('bgMusic');
-        let isMusicPlaying = false;
-        
-        musicToggle.addEventListener('click', () => {
-            if (isMusicPlaying) {
-                bgMusic.pause();
-                musicIcon.classList.remove('fa-volume-up');
-                musicIcon.classList.add('fa-volume-mute');
-            } else {
-                bgMusic.play();
-                musicIcon.classList.remove('fa-volume-mute');
-                musicIcon.classList.add('fa-volume-up');
-            }
-            isMusicPlaying = !isMusicPlaying;
-        });
-        
-        // Visitor counter with daily growth
-        function updateVisitorCount() {
-            const baseCount = 1270;
-            const dailyGrowth = 3;
-            const countKey = 'visitorCount';
-            const dateKey = 'lastUpdateDate';
-            
-            // Get stored data or initialize
-            let storedCount = localStorage.getItem(countKey);
-            let storedDate = localStorage.getItem(dateKey);
-            const today = new Date().toDateString();
-            
-            // If first visit or date changed
-            if (!storedCount || !storedDate || storedDate !== today) {
-                if (storedDate !== today && storedCount && storedDate) {
-                    // Calculate days passed since last visit
-                    const lastDate = new Date(storedDate);
-                    const currentDate = new Date();
-                    const daysPassed = Math.floor((currentDate - lastDate) / (1000 * 60 * 60 * 24));
-                    
-                    // Update count based on days passed
-                    storedCount = parseInt(storedCount) + (dailyGrowth * daysPassed);
-                } else {
-                    // First visit or no previous data
-                    storedCount = baseCount;
-                }
-                
-                // Update storage with new values
-                localStorage.setItem(countKey, storedCount);
-                localStorage.setItem(dateKey, today);
-            }
-            
-            // Animate counter
-            const counterElement = document.getElementById('visitorCount');
-            let currentCount = 0;
-            const targetCount = parseInt(storedCount);
-            const duration = 2000; // Animation duration in ms
-            const steps = 60; // Number of animation steps
-            const increment = targetCount / steps;
-            const stepTime = duration / steps;
-            
-            const timer = setInterval(() => {
-                currentCount += increment;
-                if (currentCount >= targetCount) {
-                    currentCount = targetCount;
-                    clearInterval(timer);
-                }
-                counterElement.textContent = Math.round(currentCount).toLocaleString();
-            }, stepTime);
-        }
-        
-        // Initialize the counter
-        updateVisitorCount();
-        
-        // Add hover effects to glass card
-        const glassCard = document.querySelector('.glass-card');
-        
-        glassCard.addEventListener('mousemove', (e) => {
-            const rect = glassCard.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            glassCard.style.setProperty('--mouse-x', `${x}px`);
-            glassCard.style.setProperty('--mouse-y', `${y}px`);
-            
-            // Add subtle glow effect
-            const glow = document.createElement('div');
-            glow.className = 'glow-effect';
-            glow.style.left = `${x}px`;
-            glow.style.top = `${y}px`;
-            glassCard.appendChild(glow);
-            
-            // Remove old glow effects
-            setTimeout(() => {
-                if (glassCard.contains(glow)) {
-                    glassCard.removeChild(glow);
-                }
-            }, 1000);
-        });
-        
-        // Add style for glow effect
-        const style = document.createElement('style');
-        style.textContent = `
-            .glow-effect {
-                position: absolute;
-                width: 100px;
-                height: 100px;
-                background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-                border-radius: 50%;
-                transform: translate(-50%, -50%);
-                pointer-events: none;
-                opacity: 0;
-                animation: fadeInOut 1s ease-out;
-            }
-            
-            @keyframes fadeInOut {
-                0% { opacity: 0; }
-                50% { opacity: 0.3; }
-                100% { opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+
+    <div class="flex flex-col items-center text-center">
+      <h1 class="text-4xl font-bold mb-2">._rayzz</h1>
+      <p class="text-lg text-white/80 mb-8 font-mono">Fullstack Developer</p>
+
+      <div class="w-full flex flex-col space-y-4 mb-8">
+        <a href="https://discord.com/users/1302710495362420747" target="_blank"
+           class="rounded-xl py-3 px-6 flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors backdrop-blur-md">
+          <i class="fab fa-discord mr-3 text-xl"></i>
+          <span>Connect on Discord</span>
+        </a>
+
+        <a href="https://github.com/luzisrepo" target="_blank"
+           class="rounded-xl py-3 px-6 flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors backdrop-blur-md">
+          <i class="fab fa-github mr-3 text-xl"></i>
+          <span>View on GitHub</span>
+        </a>
+      </div>
+
+      <div class="counter text-sm text-white/60 flex items-center">
+        <i class="fas fa-users mr-2"></i>
+        <span id="visitorCount">Loading...</span>
+        <span class="ml-1">visitors</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const enterScreen = document.getElementById("enterScreen");
+    const enterButton = document.getElementById("enterButton");
+    const mainContent = document.getElementById("mainContent");
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+    const musicIcon = document.getElementById("musicIcon");
+    let isMusicPlaying = false;
+
+    enterButton.addEventListener("click", () => {
+      enterScreen.style.opacity = "0";
+      setTimeout(() => enterScreen.style.display = "none", 800);
+      mainContent.style.opacity = "1";
+
+      bgMusic.play();
+      musicIcon.classList.remove('fa-volume-mute');
+      musicIcon.classList.add('fa-volume-up');
+      isMusicPlaying = true;
+    });
+
+    musicToggle.addEventListener("click", () => {
+      if (isMusicPlaying) {
+        bgMusic.pause();
+        musicIcon.classList.remove('fa-volume-up');
+        musicIcon.classList.add('fa-volume-mute');
+      } else {
+        bgMusic.play();
+        musicIcon.classList.remove('fa-volume-mute');
+        musicIcon.classList.add('fa-volume-up');
+      }
+      isMusicPlaying = !isMusicPlaying;
+    });
+
+    // Visitor counter (basic)
+    function updateVisitorCount() {
+      const baseCount = 1270;
+      document.getElementById('visitorCount').textContent = baseCount.toLocaleString();
+    }
+    updateVisitorCount();
+  </script>
 </body>
 </html>
-
-
